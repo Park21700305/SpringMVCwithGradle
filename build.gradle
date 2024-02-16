@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'war' // WAR 패키징을 위한 플러그인 추가
+}
+
+group = 'net.javaguides.springmvc'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8 // Maven 설정에 맞춰 Java 8로 변경
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework:spring-webmvc:5.1.0.RELEASE'
+    implementation 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
+    implementation 'taglibs:standard:1.1.2'
+    compileOnly 'javax.servlet:javax.servlet-api:3.1.0' // provided 스코프 대응
+    compileOnly 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1' // provided 스코프 대응
+
+    // 테스트 의존성은 그대로 유지
+    testImplementation 'org.springframework:spring-test:5.3.18'
+    testImplementation 'junit:junit:4.13.2'
+}
+
+test {
+    useJUnitPlatform()
+}
