@@ -46,9 +46,9 @@ public class SpringMvcDispatcherServletInitializer extends AbstractAnnotationCon
     * */
     @Override
     protected String[] getServletMappings() {
-        // getServletMappings() 메서드는 DispatcherServlet이 매핑될 경로를 정의합니다.
+        // getServletMappings() 메서드는 DispatcherServlet이 매핑될 경로를 정의한다.
         // 여기서 "/"는 애플리케이션의 기본 경로로 설정되며,
-        // 이는 모든 요청이 DispatcherServlet으로 라우팅되도록 합니다.
+        // 이는 모든 요청이 DispatcherServlet으로 라우팅되도록 한다.
         return new String[]{
                 "/"
         };

@@ -1,13 +1,13 @@
 plugins {
     id 'java'
-    id 'war' // WAR 패키징을 위한 플러그인 추가
+    id 'war'
 }
 
 group = 'net.javaguides.springmvc'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8 // Maven 설정에 맞춰 Java 8로 변경
+    sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
 repositories {
