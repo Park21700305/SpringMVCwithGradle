@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="icode" class="col-md-3 control-label">User
+                        <label for="userName" class="col-md-3 control-label">User
                             Name </label>
                         <div class="col-md-9">
                             <form:input path="userName" cssClass="form-control"/>

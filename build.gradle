@@ -39,7 +39,6 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
-    // Setting the source directory similar to Maven's <sourceDirectory>
     sourceSets {
         main {
             java {
