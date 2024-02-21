@@ -67,7 +67,7 @@ public class UserController {
     public Map < String, String > getCountryList() {
         Map < String, String > countryList = new HashMap < String, String > ();
         countryList.put("US", "United States");
-        countryList.put("CH", "China");
+        countryList.put("KR", "Republic of Korea");
         countryList.put("SG", "Singapore");
         countryList.put("MY", "Malaysia");
         return countryList;
