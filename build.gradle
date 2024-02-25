@@ -1,71 +1,57 @@
-//plugins {
-//    id 'java'
-//    id 'war'
-//}
-//
-//group = 'net.javaguides.springmvc'
-//version = '0.0.1-SNAPSHOT'
-//
-//java {
-//    sourceCompatibility = JavaVersion.VERSION_1_8
-//}
-//
-//repositories {
-//    mavenCentral()
-//}
-//
-//dependencies {
-//    implementation 'org.springframework:spring-webmvc:5.1.0.RELEASE'
-//    implementation 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
-//    implementation 'taglibs:standard:1.1.2'
-//    compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
-//    compileOnly 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
-//
-//    // 테스트 의존성은 그대로 유지
-//    testImplementation 'org.springframework:spring-test:5.3.18'
-//    testImplementation 'junit:junit:4.13.2'
-//}
-//
-//test {
-//    useJUnitPlatform()
-//}
 plugins {
     id 'java'
     id 'war'
 }
 
-group = 'net.javaguides.springmvc'
+group = 'com.example.springmvc_practice'
 version = '0.0.1-SNAPSHOT'
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    sourceSets {
-        main {
-            java {
-                srcDirs = ['src/main/java']
-            }
-        }
-    }
-}
+description = 'springmvc5-hibernate5-jsp-mysql-example Maven Webapp'
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation 'org.springframework:spring-webmvc:5.1.0.RELEASE'
-    implementation 'javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1'
-    implementation 'taglibs:standard:1.1.2'
-    implementation 'org.hibernate:hibernate-validator:5.4.1.Final'
-
-    compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
-    compileOnly 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
-
-    testImplementation 'org.springframework:spring-test:5.3.18'
-    testImplementation 'junit:junit:4.13.2'
+ext {
+    springVersion = '5.1.0.RELEASE'
+    hibernateVersion = '5.3.5.Final'
+    hibernateValidatorVersion = '5.4.1.Final'
+    c3p0Version = '0.9.5.2'
+    jstlVersion = '1.2.1'
+    tldVersion = '1.1.2'
+    servletsVersion = '3.1.0'
+    jspVersion = '2.3.1'
+    hsqldbVersion = '1.8.0.10'
 }
 
+dependencies {
+    // Spring MVC
+    implementation "org.springframework:spring-webmvc:$springVersion"
+    // Spring ORM
+    implementation "org.springframework:spring-orm:$springVersion"
+    // Hibernate Core
+    implementation "org.hibernate:hibernate-core:$hibernateVersion"
+    // Hibernate Validator
+    implementation "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
+    // JSTL
+    implementation "javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:$jstlVersion"
+    implementation "taglibs:standard:$tldVersion"
 
-test {
-    useJUnitPlatform()
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
+
+    // Servlet API
+    providedCompile "javax.servlet:javax.servlet-api:$servletsVersion"
+    // JSP API
+    providedCompile "javax.servlet.jsp:javax.servlet.jsp-api:$jspVersion"
+    // MySQL Connector
+    runtimeOnly "mysql:mysql-connector-java:5.1.47"
+}
+
+war {
+    enabled = true
+}
+
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 }

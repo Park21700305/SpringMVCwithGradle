@@ -1,49 +1,67 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
-
 <head>
-    <title>Customer Registration Form</title>
+    <meta charset="ISO-8859-1">
+    <title>Spring MVC 5 - form handling | Java Guides</title>
+    <link href="<c:url value="/resources/css/bootstrap.min.css" />"
+          rel="stylesheet">
+    <script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 
-    <style>
-        .error {
-            color: red
-        }
-    </style>
 </head>
-
 <body>
-<h1> Spring MVC 5 - Form Validation Example</h1>
-<i>Fill out the form. Asterisk (*) means required.</i>
-<br><br>
+<div class="container">
+    <div class="col-md-offset-2 col-md-7">
+        <h2 class="text-center">Spring MVC 5 + Hibernate 5 + JSP + MySQL
+            Example</h2>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Add Customer</div>
+            </div>
+            <div class="panel-body">
+                <form:form action="saveCustomer" cssClass="form-horizontal"
+                           method="post" modelAttribute="customer">
 
-<form:form action="processForm" modelAttribute="customer">
+                    <!-- need to associate this data with customer id -->
+                    <form:hidden path="id" />
 
-    First name:
-    <form:input path="firstName"/>
+                    <div class="form-group">
+                        <label for="firstname" class="col-md-3 control-label">First
+                            Name</label>
+                        <div class="col-md-9">
+                            <form:input path="firstName" cssClass="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-md-3 control-label">Last
+                            Name</label>
+                        <div class="col-md-9">
+                            <form:input path="lastName" cssClass="form-control" />
+                        </div>
+                    </div>
 
-    <br><br> Last name (*):
-    <form:input path="lastName"/>
-    <form:errors path="lastName" cssClass="error"/>
+                    <div class="form-group">
+                        <label for="email" class="col-md-3 control-label">Email</label>
+                        <div class="col-md-9">
+                            <form:input path="email" cssClass="form-control" />
+                        </div>
+                    </div>
 
-    <br><br> Free passes (*):
-    <form:input path="freePasses"/>
-    <form:errors path="freePasses" cssClass="error"/>
+                    <div class="form-group">
+                        <!-- Button -->
+                        <div class="col-md-offset-3 col-md-9">
+                            <form:button cssClass="btn btn-primary">Submit</form:button>
+                        </div>
+                    </div>
 
-    <br><br> Email (*):
-    <form:input path="email"/>
-    <form:errors path="email" cssClass="error"/>
-
-    <br><br> Postal Code:
-    <form:input path="postalCode"/>
-    <form:errors path="postalCode" cssClass="error"/>
-
-    <br><br>
-
-    <input type="submit" value="Submit"/>
-
-</form:form>
-
+                </form:form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
-
 </html>

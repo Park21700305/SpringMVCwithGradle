@@ -1,52 +1,57 @@
 package com.example.springmvc_practice.controller;
 
-import javax.validation.Valid;
+import java.util.List;
 
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.springmvc_practice.model.Customer;
+import com.example.springmvc_practice.entity.Customer;
+import com.example.springmvc_practice.service.CustomerService;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
 
-    // add an initbinder ... to convert trim input strings
-    // remove leading and trailing whitespace
-    // resolve issue for our validation
+    @Autowired
+    private CustomerService customerService;
 
-    @InitBinder
-    public void initBinder(WebDataBinder dataBinder) {
-
-        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-
-        dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+    @GetMapping("/list")
+    public String listCustomers(Model theModel) {
+        List < Customer > theCustomers = customerService.getCustomers();
+        theModel.addAttribute("customers", theCustomers);
+        return "list-customers";
     }
 
-
-    @RequestMapping("/showForm")
-    public String showForm(Model theModel) {
-
-        theModel.addAttribute("customer", new Customer());
-
+    @GetMapping("/showForm")
+    public String showFormForAdd(Model theModel) {
+        Customer theCustomer = new Customer();
+        theModel.addAttribute("customer", theCustomer);
         return "customer-form";
     }
 
-    @RequestMapping("/processForm")
-    public String processForm(
-            @Valid @ModelAttribute("customer") Customer theCustomer,
-            BindingResult theBindingResult) {
+    @PostMapping("/saveCustomer")
+    public String saveCustomer(@ModelAttribute("customer") Customer theCustomer) {
+        customerService.saveCustomer(theCustomer);
+        return "redirect:/customer/list";
+    }
 
-        if (theBindingResult.hasErrors()) {
-            return "customer-form";
-        } else {
-            return "customer-confirmation";
-        }
+    @GetMapping("/updateForm")
+    public String showFormForUpdate(@RequestParam("customerId") int theId,
+                                    Model theModel) {
+        Customer theCustomer = customerService.getCustomer(theId);
+        theModel.addAttribute("customer", theCustomer);
+        return "customer-form";
+    }
+
+    @GetMapping("/delete")
+    public String deleteCustomer(@RequestParam("customerId") int theId) {
+        customerService.deleteCustomer(theId);
+        return "redirect:/customer/list";
     }
 }

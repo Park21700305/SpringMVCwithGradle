@@ -5,7 +5,7 @@
 <html>
 <head><%@ page isELIgnored="false" %>
     <meta charset="ISO-8859-1">
-    <title>Spring 5 MVC - Hello World Example | javaguides.net</title>
+    <title>Spring 5 MVC - Hello World Example | springmvc</title>
 </head>
 <body>
 <h2>${helloWorld.message}</h2>
